@@ -1,0 +1,18 @@
+{
+    "mailgun": {
+        "api_key": "mailgun_api_key",
+        "domain": "practo.net"
+    },
+    "epicenter": {
+        "issue_url": "https://epicenter.practo.com/galaxyapi/issue",
+        "shared_token": "token"
+    },
+    "ray": {
+        "database": {
+            "host": "",
+            "user": "",
+            "password": "",
+            "database": ""
+        }
+    }
+}
