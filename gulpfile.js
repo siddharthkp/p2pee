@@ -16,18 +16,18 @@ gulp.task('concat', function() {
         .pipe(gulp.dest('./api/'))
 });
 
-gulp.task('watch', function() {
-    gulp.watch(['./api/*.js', './api/*/*.js'], ['apiserver']);
-});
+//gulp.task('watch', function() {
+//    gulp.watch(['./api/*.js', './api/*/*.js'], ['apiserver']);
+//});
 
 gulp.task('apiserver', ['concat'], function () {
-    setTimeout(function() {
+  //setTimeout(function() {
         nodemon({
             script: './api/api.js'
         });
-    }, 2000);
+//    }, 2000);
     // concat takes time to write the files, but still triggers next job :P
 });
 
-gulp.task('default', ['apiserver', 'watch']);
+gulp.task('default', ['concat','apiserver']);
 

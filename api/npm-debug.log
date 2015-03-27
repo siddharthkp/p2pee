@@ -1,0 +1,171 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/bin/npm', 'install', '-g', 'chance' ]
+2 info using npm@2.5.1
+3 info using node@v0.10.31
+4 verbose node symlink /usr/bin/node
+5 silly cache add args [ 'chance', null ]
+6 verbose cache add spec chance
+7 silly cache add parsed spec { raw: 'chance',
+7 silly cache add   scope: null,
+7 silly cache add   name: 'chance',
+7 silly cache add   rawSpec: '',
+7 silly cache add   spec: '*',
+7 silly cache add   type: 'range' }
+8 verbose addNamed chance@*
+9 silly addNamed semver.valid null
+10 silly addNamed semver.validRange *
+11 silly addNameRange { name: 'chance', range: '*', hasData: false }
+12 silly mapToRegistry name chance
+13 silly mapToRegistry using default registry
+14 silly mapToRegistry registry https://registry.npmjs.org/
+15 silly mapToRegistry uri https://registry.npmjs.org/chance
+16 verbose addNameRange registry:https://registry.npmjs.org/chance not in flight; fetching
+17 verbose request uri https://registry.npmjs.org/chance
+18 verbose request no auth needed
+19 info attempt registry request try #1 at 17:44:10
+20 verbose request id eb05c13e62e3e2b2
+21 http request GET https://registry.npmjs.org/chance
+22 http 200 https://registry.npmjs.org/chance
+23 silly get cb [ 200,
+23 silly get   { date: 'Fri, 27 Mar 2015 17:45:37 GMT',
+23 silly get     server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+23 silly get     etag: '"2E9AQT0UNOA2A8RI7AK3L710L"',
+23 silly get     'content-type': 'application/json',
+23 silly get     'cache-control': 'max-age=60',
+23 silly get     'content-length': '43590',
+23 silly get     'accept-ranges': 'bytes',
+23 silly get     via: '1.1 varnish',
+23 silly get     age: '0',
+23 silly get     'x-served-by': 'cache-sn88-SIN',
+23 silly get     'x-cache': 'MISS',
+23 silly get     'x-cache-hits': '0',
+23 silly get     'x-timer': 'S1427478336.680688,VS0,VE1272',
+23 silly get     vary: 'Accept',
+23 silly get     'keep-alive': 'timeout=10, max=50',
+23 silly get     connection: 'Keep-Alive' } ]
+24 verbose get saving chance to /home/ubuntu/.npm/registry.npmjs.org/chance/.cache.json
+25 silly addNameRange number 2 { name: 'chance', range: '*', hasData: true }
+26 silly addNameRange versions [ 'chance',
+26 silly addNameRange   [ '0.1.0',
+26 silly addNameRange     '0.1.1',
+26 silly addNameRange     '0.2.0',
+26 silly addNameRange     '0.2.1',
+26 silly addNameRange     '0.3.0',
+26 silly addNameRange     '0.3.1',
+26 silly addNameRange     '0.3.3',
+26 silly addNameRange     '0.4.0',
+26 silly addNameRange     '0.4.2',
+26 silly addNameRange     '0.4.3',
+26 silly addNameRange     '0.5.0',
+26 silly addNameRange     '0.5.1',
+26 silly addNameRange     '0.5.2',
+26 silly addNameRange     '0.5.3',
+26 silly addNameRange     '0.5.4',
+26 silly addNameRange     '0.5.5',
+26 silly addNameRange     '0.5.6',
+26 silly addNameRange     '0.5.7',
+26 silly addNameRange     '0.5.8',
+26 silly addNameRange     '0.5.9',
+26 silly addNameRange     '0.6.0',
+26 silly addNameRange     '0.6.1',
+26 silly addNameRange     '0.6.2',
+26 silly addNameRange     '0.6.3',
+26 silly addNameRange     '0.6.4',
+26 silly addNameRange     '0.7.0',
+26 silly addNameRange     '0.7.1',
+26 silly addNameRange     '0.7.2',
+26 silly addNameRange     '0.7.3' ] ]
+27 verbose addNamed chance@0.7.3
+28 silly addNamed semver.valid 0.7.3
+29 silly addNamed semver.validRange 0.7.3
+30 silly mapToRegistry name chance
+31 silly mapToRegistry using default registry
+32 silly mapToRegistry registry https://registry.npmjs.org/
+33 silly mapToRegistry uri https://registry.npmjs.org/chance
+34 verbose addRemoteTarball https://registry.npmjs.org/chance/-/chance-0.7.3.tgz not in flight; adding
+35 verbose addRemoteTarball [ 'https://registry.npmjs.org/chance/-/chance-0.7.3.tgz',
+35 verbose addRemoteTarball   'dc4b0605424952cb07d4a00c3ab75980eaba172e' ]
+36 info retry fetch attempt 1 at 17:44:11
+37 info attempt registry request try #1 at 17:44:11
+38 http fetch GET https://registry.npmjs.org/chance/-/chance-0.7.3.tgz
+39 http fetch 200 https://registry.npmjs.org/chance/-/chance-0.7.3.tgz
+40 silly fetchAndShaCheck shasum dc4b0605424952cb07d4a00c3ab75980eaba172e
+41 verbose addTmpTarball /tmp/npm-30095-ccd86664/registry.npmjs.org/chance/-/chance-0.7.3.tgz not in flight; adding
+42 verbose addTmpTarball already have metadata; skipping unpack for chance@0.7.3
+43 silly cache afterAdd chance@0.7.3
+44 verbose afterAdd /home/ubuntu/.npm/chance/0.7.3/package/package.json not in flight; writing
+45 verbose afterAdd /home/ubuntu/.npm/chance/0.7.3/package/package.json written
+46 silly install resolved [ { name: 'chance',
+46 silly install resolved     main: './chance.js',
+46 silly install resolved     version: '0.7.3',
+46 silly install resolved     description: 'Chance - Utility library to generate anything random',
+46 silly install resolved     homepage: 'http://chancejs.com',
+46 silly install resolved     author: { name: 'Victor Quinn', email: 'mail@victorquinn.com' },
+46 silly install resolved     bugs: { url: 'https://github.com/victorquinn/chancejs/issues' },
+46 silly install resolved     repository:
+46 silly install resolved      { type: 'git',
+46 silly install resolved        url: 'https://github.com/victorquinn/chancejs.git' },
+46 silly install resolved     licenses: [ [Object] ],
+46 silly install resolved     devDependencies:
+46 silly install resolved      { grunt: '0.4.5',
+46 silly install resolved        'grunt-bump': '0.0.16',
+46 silly install resolved        'grunt-contrib-jshint': '^0.11.0',
+46 silly install resolved        'grunt-contrib-uglify': '^0.7.0',
+46 silly install resolved        'grunt-contrib-watch': '0.6.1',
+46 silly install resolved        'grunt-mocha-phantomjs': '^0.6.0',
+46 silly install resolved        'line-by-line': '^0.1.3',
+46 silly install resolved        'lodash-cli': '^2.4.2',
+46 silly install resolved        'mocha-phantomjs': '^3.5.3' },
+46 silly install resolved     scripts:
+46 silly install resolved      { pretest: 'lodash compat -o test/lib/lodash/lodash.build.js',
+46 silly install resolved        test: './node_modules/mocha-phantomjs/bin/mocha-phantomjs test/runner.html' },
+46 silly install resolved     bin: { chance: './bin/chance.js' },
+46 silly install resolved     keywords:
+46 silly install resolved      [ 'chance',
+46 silly install resolved        'random',
+46 silly install resolved        'generator',
+46 silly install resolved        'test',
+46 silly install resolved        'mersenne',
+46 silly install resolved        'name',
+46 silly install resolved        'address',
+46 silly install resolved        'dice' ],
+46 silly install resolved     spm: { main: 'chance.js', ignore: [Object] },
+46 silly install resolved     dependencies: { minimist: '^1.1.0' },
+46 silly install resolved     gitHead: 'bf0306cfb86bdc8785df201454292ee9f6d49763',
+46 silly install resolved     _id: 'chance@0.7.3',
+46 silly install resolved     _shasum: 'dc4b0605424952cb07d4a00c3ab75980eaba172e',
+46 silly install resolved     _from: 'chance@*',
+46 silly install resolved     _npmVersion: '2.1.17',
+46 silly install resolved     _nodeVersion: '0.10.33',
+46 silly install resolved     _npmUser: { name: 'victorquinn', email: 'mail@victorquinn.com' },
+46 silly install resolved     maintainers: [ [Object] ],
+46 silly install resolved     dist:
+46 silly install resolved      { shasum: 'dc4b0605424952cb07d4a00c3ab75980eaba172e',
+46 silly install resolved        tarball: 'http://registry.npmjs.org/chance/-/chance-0.7.3.tgz' },
+46 silly install resolved     directories: {},
+46 silly install resolved     _resolved: 'https://registry.npmjs.org/chance/-/chance-0.7.3.tgz' } ]
+47 info install chance@0.7.3 into /usr/lib
+48 info installOne chance@0.7.3
+49 verbose installOne of chance to /usr/lib not in flight; installing
+50 warn locking Error: EACCES, open '/home/ubuntu/.npm/_locks/chance-49c791c1102ef6dc.lock'
+50 warn locking  /home/ubuntu/.npm/_locks/chance-49c791c1102ef6dc.lock failed { [Error: EACCES, open '/home/ubuntu/.npm/_locks/chance-49c791c1102ef6dc.lock']
+50 warn locking   errno: 3,
+50 warn locking   code: 'EACCES',
+50 warn locking   path: '/home/ubuntu/.npm/_locks/chance-49c791c1102ef6dc.lock' }
+51 verbose stack Error: Attempt to unlock /usr/lib/node_modules/chance, which hasn't been locked
+51 verbose stack     at unlock (/usr/lib/node_modules/npm/lib/utils/locker.js:66:11)
+51 verbose stack     at cb (/usr/lib/node_modules/npm/lib/install.js:929:5)
+51 verbose stack     at /usr/lib/node_modules/npm/lib/install.js:933:20
+51 verbose stack     at /usr/lib/node_modules/npm/lib/utils/locker.js:40:9
+51 verbose stack     at cb (/usr/lib/node_modules/npm/node_modules/lockfile/lockfile.js:149:38)
+51 verbose stack     at /usr/lib/node_modules/npm/node_modules/lockfile/lockfile.js:177:38
+51 verbose stack     at Object.oncomplete (fs.js:107:15)
+52 verbose cwd /home/ubuntu/www/p2p/api
+53 error Linux 3.13.0-36-generic
+54 error argv "node" "/usr/bin/npm" "install" "-g" "chance"
+55 error node v0.10.31
+56 error npm  v2.5.1
+57 error Attempt to unlock /usr/lib/node_modules/chance, which hasn't been locked
+58 error If you need help, you may report this error at:
+58 error     <http://github.com/npm/npm/issues>
+59 verbose exit [ 1, true ]
