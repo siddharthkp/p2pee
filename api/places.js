@@ -45,6 +45,7 @@ app.get('/places', function(req, res) {
                     type: result.types[0],
                     photo_url: photo_url
                 };
+                var blacklist = false;
                 if (['sublocality_level_1'].indexOf(place.type) === -1) places.push(place);
                 if (places.length === 3) break;
             }
@@ -107,7 +108,6 @@ app.get('/place', function (req, res) {
     var options = {
         url: host + path
     };
-
     request(options, function (error, response, body) {
         if (!error && response.statusCode == 200) {
             var result = JSON.parse(body).result;
@@ -157,7 +157,7 @@ app.get('/place', function (req, res) {
         db.query(query, function (err, rows) {
             if (!err) {
                 place.royals = rows;
-                res.end(JSON.stringify(place));
+                attachScore(place);
             } else handleError('Fetching royals', req, res, {
                 status: 500,
                 message: err
@@ -165,37 +165,19 @@ app.get('/place', function (req, res) {
         });
     }
 
-});
-
-app.post('/places', function (req, res) {
-    var device_id = req.query.device_id;
-
-    if (!device_id) parameterMissing('Device id', req, res);
-
-    getProfileBy('device_id', device_id, function(profile) {
-        if (profile) {
-            res.end(JSON.stringify(profile));
-        } else createUser(device_id);
-    }, req);
-
-    var db = getDb();
-    function createUser(device_id) {
-        var Chance = require('chance');
-        var chance = new Chance();
-        var name = chance.last();
-        var query = 'INSERT INTO profiles VALUES (null, ' + device_id + ',\"' + name + '\", null);';
-
-        db.query(query, function (err, rows) {
+    function attachScore(place) {
+        var db = getDb();
+        var query = 'SELECT AVG(feedback) score from feedback WHERE place_id = \"' + place.id + '\"';
+        db.query(query, function(err, rows) {
             if (!err) {
-                getProfileBy('device_id', device_id, function(profile) {
-                    if (profile) res.end(JSON.stringify(profile));
-                }, req);
-            } else handleError('Creating profile', req, res, {
+                place.score = rows[0].score;
+                res.end(JSON.stringify(place));
+            } else handleError('Fetching score', req, res, {
                 status: 500,
                 message: err
             });
         });
     }
-});
 
+});
 

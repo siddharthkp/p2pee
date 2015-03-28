@@ -7,7 +7,13 @@ var config = require('../config.json');
 var server = app.listen(80, function () {
       console.log('p2p listening');
 });
+function log(req, res, next) {
+    console.log(req.originalUrl + '\n');
+    next();
+}
 app.use(cors());
-app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }))
+//app.use(bodyParser.json());
 app.use(cookieParser());
+app.use(log);
 

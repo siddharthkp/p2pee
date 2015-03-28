@@ -16,6 +16,7 @@
     "gulp-nodemon": "^1.0.5",
     "gulp-shell": "0.3.0",
     "gulp-watch": "4.1.1",
+    "multer": "^0.1.8",
     "mysql": "^2.5.5",
     "nodesql": "^0.2.4",
     "passport": "^0.2.1",

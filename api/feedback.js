@@ -1,7 +1,7 @@
 app.post('/feedback', function (req, res) {
-    var profile_id = req.query.profile_id;
-    var place_id = req.query.place_id;
-    var feedback = req.query.feedback || 0;
+    var profile_id = req.body.profile_id;
+    var place_id = req.body.place_id;
+    var feedback = req.body.feedback || 0;
 
     if (!profile_id) parameterMissing('Profile id', req, res);
     if (!place_id) parameterMissing('Place id', req, res);
@@ -18,7 +18,9 @@ app.post('/feedback', function (req, res) {
         var query = 'INSERT INTO feedback VALUES (null, ' + profile_id + ',\"' + place_id + '\",' + feedback + ');';
         db.query(query, function (err, rows) {
             if (!err) {
-                res.end('Thanks for your feedback');
+                res.end(JSON.stringify({
+                  message: 'Thanks for your feedback'
+                }));
             } else handleError('Check in', req, res, {
                 status: 500,
                 message: err

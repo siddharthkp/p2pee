@@ -1,5 +1,5 @@
 app.post('/profiles', function (req, res) {
-    var device_id = req.query.device_id;
+    var device_id = req.body.device_id;
 
     if (!device_id) parameterMissing('Device id', req, res);
 
@@ -7,14 +7,15 @@ app.post('/profiles', function (req, res) {
         if (profile) {
             res.end(JSON.stringify(profile));
         } else createUser(device_id);
-    }, req);
+    }, req, res);
 
     var db = getDb();
     function createUser(device_id) {
         var Chance = require('chance');
         var chance = new Chance();
         var name = chance.last();
-        var query = 'INSERT INTO profiles VALUES (null, ' + device_id + ',\"' + name + '\", null);';
+        var photo_url = 'http://api.adorable.io/avatars/250/' + name + '.png';
+        var query = 'INSERT INTO profiles VALUES (null, \"' + device_id + '\",\"' + name + '\", \"' + photo_url + '\");';
 
         db.query(query, function (err, rows) {
             if (!err) {
@@ -75,7 +76,6 @@ function attachPlace(place, res, profile){
       var options = {
           url: host + path
       };
-      console.log(options.url);
 
       request(options, function (error, response, body) {
           if (!error && response.statusCode == 200) {
@@ -111,11 +111,11 @@ function getDb(){
     var db = nodeSql.createMySqlStrategy(connection);
     return db;
 }
-function getProfileBy(type, id, callback, req) {
+function getProfileBy(type, id, callback, req, res) {
     db = getDb();
     var query = 'SELECT * FROM profiles WHERE ';
     if (type == 'id') query += 'id = ' + id;
-    if (type == 'device_id') query += 'device_id = ' + id;
+    if (type == 'device_id') query += 'device_id = \"' + id + '\"';
 
     db.query(query, function (err, rows) {
         if (!err) {
@@ -132,8 +132,8 @@ function getProfileBy(type, id, callback, req) {
 }
 
 app.patch('/profiles', function (req, res) {
-    var id = req.query.id;
-    var name = req.query.name;
+    var id = req.body.id;
+    var name = req.body.name;
 
     if (!id) parameterMissing('Id', req, res);
     if (!name) parameterMissing('Name', req, res);

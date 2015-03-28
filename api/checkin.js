@@ -1,6 +1,6 @@
 app.post('/checkin', function (req, res) {
-    var profile_id = req.query.profile_id;
-    var place_id = req.query.place_id;
+    var profile_id = req.body.profile_id;
+    var place_id = req.body.place_id;
 
     if (!profile_id) parameterMissing('Profile id', req, res);
     if (!place_id) parameterMissing('Place id', req, res);
@@ -17,11 +17,26 @@ app.post('/checkin', function (req, res) {
         var query = 'INSERT INTO checkins VALUES (null, ' + profile_id + ',\"' + place_id + '\", null);';
         db.query(query, function (err, rows) {
             if (!err) {
-                res.end('Checked in!');
+                checkAndReply(profile_id);
             } else handleError('Check in', req, res, {
                 status: 500,
                 message: err
             });
+        });
+    }
+    function checkAndReply(profile_id) {
+        var db = getDb();
+        var query = 'SELECT count(*) checkins, profile_id from checkins where place_id = \"' + place_id + '\" GROUP BY profile_id ORDER BY checkins DESC LIMIT 1';
+        db.query(query, function (err, rows) {
+            if (!err) {
+                var isKing = false;
+                var king = rows[0].profile_id;
+                if (profile_id == king) isKing = true;
+                res.end(JSON.stringify({
+                    message: 'You have checked in!',
+                    king: isKing
+                }));
+            }
         });
     }
 });
