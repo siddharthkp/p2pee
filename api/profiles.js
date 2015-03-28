@@ -33,10 +33,75 @@ app.get('/profiles', function(req, res) {
     var id = req.query.id;
     if (!id) parameterMissing('Id', req, res);
     getProfileBy('id', id, function(profile) {
-        if (profile) res.end(JSON.stringify(profile));
+        if (profile) {
+            attachCheckins(profile, req, res);
+        }
         else res.end('No profile found');
     }, req);
 });
+
+function attachCheckins(profile, req, res) {
+    var db = getDb();
+    var query = 'SELECT * FROM checkins WHERE profile_id = \"' + profile.id + '\"';
+    query += 'ORDER BY checkedin_at DESC LIMIT 3';
+
+    db.query(query, function (err, rows) {
+        if (!err) {
+            profile.checkins = rows;
+            attachPlaces(profile, req, res);
+        } else handleError('Fetching checkins', req, res, {
+            status: 500,
+            message: err
+        });
+    });
+}
+var count;
+function attachPlaces(profile, req, res) {
+    count = profile.checkins.length;
+    for (var i in profile.checkins) {
+        attachPlace(profile.checkins[i], res, profile);
+    }
+}
+
+function attachPlace(place, res, profile){
+      var https = require('https');
+      var key = 'AIzaSyArBmLVB_OqHZAiQo7zoSzbnAiDjkPZ03o';
+      var radius = 250;
+      var host = 'https://maps.googleapis.com';
+      var path = '/maps/api/place/details/json?' + 'key=' + key;
+      path += '&placeid=' + place.place_id;
+
+      var request = require('request');
+      var options = {
+          url: host + path
+      };
+      console.log(options.url);
+
+      request(options, function (error, response, body) {
+          if (!error && response.statusCode == 200) {
+              var result = JSON.parse(body).result;
+              place.id = result.place_id;
+              place.name = result.name;
+              place.lat = result.geometry.location.lat;
+              place.lng = result.geometry.location.lng;
+              place.type = result.types[0];
+              var photo_url = null;
+              if (result.photos && result.photos.length) {
+                  photo_url = 'https://maps.googleapis.com/maps/api/place/photo?';
+                  photo_url+='maxwidth=1000&key=AIzaSyArBmLVB_OqHZAiQo7zoSzbnAiDjkPZ03o&photoreference=';
+                  photo_url+= result.photos[0].photo_reference;
+              }
+              place.photo_url = photo_url;
+              count--;
+              if (!count) res.end(JSON.stringify(profile));
+          } else {
+              handleError('Fetching place', req, res, {
+                  status: 500,
+                  message: error
+              });
+          }
+      });
+}
 
 function getDb(){
     var database = config.database;
