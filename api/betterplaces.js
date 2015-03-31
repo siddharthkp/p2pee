@@ -37,6 +37,14 @@ app.get('/betterplaces', function(req, res) {
             results = results.filter(function(a){
                 return (a.types[0] != 'store');
             });
+            results = results.filter(function(a){
+                return (a.name.indexOf('Sonim') === -1);
+            });
+            results = results.filter(function(a){
+                return (a.types[0] != 'neighborhood');
+            });
+
+
             var places = [];
             var structuredPlaces = {};
             var toprated = results.sort(function(a,b){return b.rating-a.rating;})[0];

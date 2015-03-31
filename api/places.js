@@ -123,6 +123,7 @@ app.get('/place', function (req, res) {
                 photo_url+='maxwidth=1000&key=AIzaSyArBmLVB_OqHZAiQo7zoSzbnAiDjkPZ03o&photoreference=';
                 photo_url+= result.photos[0].photo_reference;
             }
+            if (place.id == 'ChIJVVVVEHX5rjsRDRigZcDpKEM') photo_url = 'https://akankshasinha.files.wordpress.com/2012/02/shoppers-stop-bangalore.jpg';
             place.photo_url = photo_url;
             attachCheckins(place);
         } else {
@@ -141,6 +142,9 @@ app.get('/place', function (req, res) {
         db.query(query, function (err, rows) {
             if (!err) {
                 place.checkins = rows;
+                for (var i in place.checkins) {
+                    place.checkins[i].checkedin_at = place.checkins[i].checkedin_at.toISOString().replace(/T/, ' ').replace(/\..+/, '');
+                }
                 attachRoyals(place);
             } else handleError('Fetching checkins', req, res, {
                 status: 500,
